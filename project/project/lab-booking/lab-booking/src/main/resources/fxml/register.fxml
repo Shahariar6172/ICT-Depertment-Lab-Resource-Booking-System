@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="10" prefWidth="420" prefHeight="440"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.mbstu.labbooking.controller.RegisterController">
+    <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+
+    <Label text="Student Registration">
+        <font><Font name="System Bold" size="18"/></font>
+    </Label>
+
+    <TextField fx:id="nameField" promptText="Full Name"/>
+    <TextField fx:id="studentIdField" promptText="Student ID (e.g. IT-24057)"/>
+    <TextField fx:id="emailField" promptText="Email"/>
+    <PasswordField fx:id="passwordField" promptText="Password"/>
+    <PasswordField fx:id="confirmField" promptText="Confirm Password"/>
+
+    <Label fx:id="messageLabel" style="-fx-text-fill: red;"/>
+
+    <Button text="Register" onAction="#handleRegister" defaultButton="true"
+            maxWidth="Infinity" style="-fx-background-color: #16a34a; -fx-text-fill: white;"/>
+    <Hyperlink text="Back to Login" onAction="#goToLogin"/>
+</VBox>

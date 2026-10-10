@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefWidth="980" prefHeight="640"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mbstu.labbooking.controller.AdminDashboardController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #7c2d12;">
+            <padding><Insets top="12" right="16" bottom="12" left="16"/></padding>
+            <Label text="Lab Booking - Admin Panel" style="-fx-text-fill: white;">
+                <font><Font name="System Bold" size="16"/></font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="welcomeLabel" style="-fx-text-fill: #fed7aa;"/>
+            <Button text="Logout" onAction="#handleLogout"/>
+        </HBox>
+    </top>
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+
+            <Tab text="Pending Requests" onSelectionChanged="#loadPending">
+                <VBox spacing="10">
+                    <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                    <TableView fx:id="pendingTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colPdStudent" text="Student" prefWidth="160"/>
+                            <TableColumn fx:id="colPdDevice" text="Device" prefWidth="180"/>
+                            <TableColumn fx:id="colPdRequest" text="Requested" prefWidth="150"/>
+                            <TableColumn fx:id="colPdDue" text="Due Date" prefWidth="110"/>
+                            <TableColumn fx:id="colPdPurpose" text="Purpose" prefWidth="200"/>
+                        </columns>
+                    </TableView>
+                    <HBox spacing="8">
+                        <Button text="Approve" onAction="#handleApprove"
+                                style="-fx-background-color: #16a34a; -fx-text-fill: white;"/>
+                        <Button text="Reject" onAction="#handleReject"
+                                style="-fx-background-color: #dc2626; -fx-text-fill: white;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="Issue / Return" onSelectionChanged="#loadIssueReturn">
+                <VBox spacing="10">
+                    <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                    <Label text="Approved (waiting for issue):"/>
+                    <TableView fx:id="approvedTable" prefHeight="170">
+                        <columns>
+                            <TableColumn fx:id="colApStudent" text="Student" prefWidth="160"/>
+                            <TableColumn fx:id="colApDevice" text="Device" prefWidth="180"/>
+                            <TableColumn fx:id="colApDue" text="Due Date" prefWidth="110"/>
+                        </columns>
+                    </TableView>
+                    <Button text="Mark as Issued" onAction="#handleIssue"
+                            style="-fx-background-color: #2563eb; -fx-text-fill: white;"/>
+                    <Separator/>
+                    <Label text="Issued (waiting for return):"/>
+                    <TableView fx:id="issuedTable" prefHeight="170">
+                        <columns>
+                            <TableColumn fx:id="colIsStudent" text="Student" prefWidth="160"/>
+                            <TableColumn fx:id="colIsDevice" text="Device" prefWidth="180"/>
+                            <TableColumn fx:id="colIsDue" text="Due Date" prefWidth="110"/>
+                            <TableColumn fx:id="colIsIssueDate" text="Issued On" prefWidth="150"/>
+                        </columns>
+                    </TableView>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <CheckBox fx:id="damagedCheck" text="Returned damaged?"/>
+                        <Button text="Process Return" onAction="#handleReturn"
+                                style="-fx-background-color: #16a34a; -fx-text-fill: white;"/>
+                        <Label fx:id="returnInfoLabel" style="-fx-text-fill: #b45309;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="Stock Summary" onSelectionChanged="#loadStock">
+                <VBox spacing="10">
+                    <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                    <Label fx:id="stockSummaryLabel" style="-fx-font-weight: bold;"/>
+                    <TableView fx:id="stockTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colStName" text="Device" prefWidth="300"/>
+                            <TableColumn fx:id="colStCategory" text="Category" prefWidth="120"/>
+                            <TableColumn fx:id="colStTotal" text="Total" prefWidth="80"/>
+                            <TableColumn fx:id="colStAvailable" text="Available" prefWidth="90"/>
+                            <TableColumn fx:id="colStIssued" text="Out" prefWidth="80"/>
+                            <TableColumn fx:id="colStDamaged" text="Damaged" prefWidth="90"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="Devices" onSelectionChanged="#loadDevices">
+                <VBox spacing="10">
+                    <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                    <TableView fx:id="deviceTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colDvName" text="Device" prefWidth="220"/>
+                            <TableColumn fx:id="colDvCategory" text="Category" prefWidth="120"/>
+                            <TableColumn fx:id="colDvSerial" text="Serial No" prefWidth="140"/>
+                            <TableColumn fx:id="colDvStatus" text="Status" prefWidth="110"/>
+                        </columns>
+                    </TableView>
+                    <HBox spacing="8">
+                        <TextField fx:id="devNameField" promptText="Device name" HBox.hgrow="ALWAYS"/>
+                        <ComboBox fx:id="devCategoryBox" prefWidth="140"/>
+                        <TextField fx:id="devSerialField" promptText="Serial no" prefWidth="140"/>
+                        <Button text="Add Device" onAction="#handleAddDevice"/>
+                        <Button text="Mark Repaired" onAction="#handleMarkRepaired"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="Penalties" onSelectionChanged="#loadPenalties">
+                <VBox spacing="10">
+                    <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                    <TableView fx:id="penaltyTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colPnStudent" text="Student" prefWidth="160"/>
+                            <TableColumn fx:id="colPnDevice" text="Device" prefWidth="180"/>
+                            <TableColumn fx:id="colPnType" text="Type" prefWidth="100"/>
+                            <TableColumn fx:id="colPnAmount" text="Amount (Tk)" prefWidth="110"/>
+                            <TableColumn fx:id="colPnPaid" text="Paid" prefWidth="90"/>
+                        </columns>
+                    </TableView>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Button text="Mark as Paid" onAction="#handleMarkPaid"/>
+                        <Label fx:id="totalLabel" style="-fx-font-weight: bold;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

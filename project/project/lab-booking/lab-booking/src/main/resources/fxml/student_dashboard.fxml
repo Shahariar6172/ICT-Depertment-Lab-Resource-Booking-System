@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefWidth="900" prefHeight="600"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mbstu.labbooking.controller.StudentDashboardController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #1e293b;">
+            <padding><Insets top="12" right="16" bottom="12" left="16"/></padding>
+            <Label text="Lab Booking - Student Panel" style="-fx-text-fill: white;">
+                <font><Font name="System Bold" size="16"/></font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="welcomeLabel" style="-fx-text-fill: #cbd5e1;"/>
+            <Button text="Logout" onAction="#handleLogout"/>
+        </HBox>
+    </top>
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <Tab text="Request Materials">
+                <VBox spacing="10">
+                    <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                    <Label text="1. Choose a subject or work" style="-fx-font-weight: bold;"/>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <ComboBox fx:id="subjectBox" promptText="Select subject / work" prefWidth="330"/>
+                        <Button text="Refresh Stock" onAction="#loadDevices"/>
+                        <CheckBox fx:id="allStockCheck" text="Show all lab stock" onAction="#loadDevices"/>
+                    </HBox>
+                    <Label text="Changing subject clears your list. Custom work shows all lab materials." wrapText="true"/>
+                    <Label text="2. Choose material, variant and quantity; add each to your list" style="-fx-font-weight: bold;"/>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <ComboBox fx:id="materialBox" promptText="Material (e.g. Breadboard)" prefWidth="240"/>
+                        <ComboBox fx:id="variantBox" promptText="Type / parts" prefWidth="310"/>
+                        <Label text="Qty:"/>
+                        <Spinner fx:id="quantitySpinner" editable="false" prefWidth="90"/>
+                        <Button fx:id="addButton" text="Add to List" onAction="#handleAddItem"/>
+                    </HBox>
+                    <Label fx:id="catalogStatus" wrapText="true"/>
+                    <Label fx:id="stockLabel" wrapText="true"/>
+                    <TableView fx:id="cartTable" VBox.vgrow="ALWAYS">
+                        <placeholder><Label text="Your list is empty. Add breadboards, sensors or other materials above."/></placeholder>
+                        <columns>
+                            <TableColumn fx:id="colCartMaterial" text="Material" prefWidth="240"/>
+                            <TableColumn fx:id="colCartVariant" text="Type / Variant" prefWidth="230"/>
+                            <TableColumn fx:id="colCartCategory" text="Category" prefWidth="150"/>
+                            <TableColumn fx:id="colCartQuantity" text="Quantity" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label fx:id="cartSummary"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Remove Selected" onAction="#handleRemoveItem"/>
+                        <Button text="Clear List" onAction="#handleClearCart"/>
+                    </HBox>
+                    <Label text="3. Set return date and purpose, then send the whole list" style="-fx-font-weight: bold;"/>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Label text="Return by:"/>
+                        <DatePicker fx:id="duePicker" prefWidth="150"/>
+                        <TextField fx:id="purposeField" promptText="Work / experiment / project purpose (required)" HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="submitButton" text="Send All Requests" onAction="#handleBook"
+                                style="-fx-background-color: #2563eb; -fx-text-fill: white;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+            <Tab text="My Bookings" onSelectionChanged="#loadMyBookings">
+                <VBox spacing="10">
+                    <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                    <TableView fx:id="bookingTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colBkBatch" text="Request" prefWidth="100"/>
+                            <TableColumn fx:id="colBkDevice" text="Device" prefWidth="200"/>
+                            <TableColumn fx:id="colBkRequest" text="Requested" prefWidth="150"/>
+                            <TableColumn fx:id="colBkDue" text="Due Date" prefWidth="110"/>
+                            <TableColumn fx:id="colBkStatus" text="Status" prefWidth="110"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+            <Tab text="My Penalties" onSelectionChanged="#loadMyPenalties">
+                <VBox spacing="10">
+                    <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                    <TableView fx:id="penaltyTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colPnDevice" text="Device" prefWidth="200"/>
+                            <TableColumn fx:id="colPnType" text="Type" prefWidth="100"/>
+                            <TableColumn fx:id="colPnAmount" text="Amount (Tk)" prefWidth="110"/>
+                            <TableColumn fx:id="colPnPaid" text="Paid" prefWidth="90"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

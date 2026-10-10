@@ -1,0 +1,43 @@
+Maven clean compile: BUILD SUCCESS
+Runtime: JDK 21; JavaFX 23.0.1; MariaDB 11.4.5; MySQL Connector/J 8.4.0
+
+PASS real legacy schema upgrades and seeds subjects
+PASS migration preserves legacy device count
+PASS repeat startup is idempotent
+PASS partial catalog repaired
+PASS real DAO resolves legacy naming
+PASS unstocked catalog variant explicitly has zero availability
+PASS login FXML opens
+PASS registration and login against real DB
+PASS login opens actual student FXML
+PASS subjects populated
+PASS EEE material dropdown contains breadboards and sensors
+PASS zero stock shows catalog with booking disabled
+PASS zero stock explains what to do
+PASS legacy spelling and OTHER category map to real breadboard stock
+PASS repeated variant merges quantity
+PASS cannot exceed available stock
+PASS multiple materials in one draft
+PASS refresh preserves draft
+PASS all stock includes unmapped admin inventory with subject retained
+PASS all-stock view keeps request subject
+PASS missing return date blocks submission and preserves draft
+PASS stale stock failure keeps UI draft and submits no partial request
+PASS UI failure restores earlier reserved items
+PASS single click creates one batch and three unit bookings
+PASS successful request clears draft
+PASS My Bookings loads submitted units
+PASS My Penalties opens
+PASS existing admin login works
+PASS admin sees every requested unit
+PASS admin issue workflow works
+PASS admin return workflow works
+PASS all admin tabs load
+PASS short stock rejected in real database
+PASS real transaction rolls back all request rows
+PASS real rollback restores previously reserved unit
+PASS shipped fresh-install SQL creates populated catalog and original stock
+PASS manual SQL upgrade is repeatable without duplicating stock
+ALL 37 INTEGRATION CHECKS PASSED
+
+Standalone regression suites: MaterialCatalogTest, BatchRequestTest and StudentSchemaTest passed.
